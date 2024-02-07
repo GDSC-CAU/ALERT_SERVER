@@ -4,6 +4,7 @@ import gdsc.cau.alert.user.domain.User;
 import gdsc.cau.alert.user.domain.UserNotification;
 import gdsc.cau.alert.user.dto.ResponseUserDto;
 import gdsc.cau.alert.user.dto.ResponseUserNotificationDto;
+import gdsc.cau.alert.user.dto.UpdateUserDto;
 import gdsc.cau.alert.user.repository.UserNotificationRepository;
 import gdsc.cau.alert.user.repository.UserRepository;
 import gdsc.cau.alert.util.api.ResponseCode;
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     // 회원정보 수정
     @Transactional
-    public void updateUser(Long id, ResponseUserDto dto) {
+    public void updateUser(Long id, UpdateUserDto dto) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserException(ResponseCode.USER_NOT_FOUND));
         user.update(dto.getName(), dto.getAddress1(), dto.getAddress2());
         userRepository.save(user);

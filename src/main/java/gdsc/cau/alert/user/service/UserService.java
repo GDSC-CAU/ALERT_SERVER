@@ -2,6 +2,7 @@ package gdsc.cau.alert.user.service;
 
 import gdsc.cau.alert.user.dto.ResponseUserDto;
 import gdsc.cau.alert.user.dto.ResponseUserNotificationDto;
+import gdsc.cau.alert.user.dto.UpdateUserDto;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface UserService {
     ResponseUserDto getUser(Long id);
 
     // 회원정보 수정
-    void updateUser(Long id, ResponseUserDto dto);
+    void updateUser(Long id, UpdateUserDto dto);
 
     // 회원의 알림 조회
     List<ResponseUserNotificationDto> getUserNotification(Long id);
