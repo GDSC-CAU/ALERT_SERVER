@@ -27,11 +27,18 @@ public enum ResponseCode {
     // 409 Conflict
 
     // 500 Internal Server Error
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "서버에 오류가 발생하였습니다.");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "서버에 오류가 발생하였습니다."),
 
     // 200 OK
+    USER_READ_SUCCESS(HttpStatus.OK, true, "사용자 조회 성공"),
+    USER_UPDATE_SUCCESS(HttpStatus.OK, true, "사용자 수정 성공"),
+    USER_DELETE_SUCCESS(HttpStatus.OK, true, "사용자 삭제 성공"),
+    NOTIFICATION_READ_SUCCESS(HttpStatus.OK, true, "알림 조회 성공"),
+    NOTIFICATION_DELETE_SUCCESS(HttpStatus.OK, true, "알림 수정 성공"),
 
     // 201 Created
+    USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공");
+
 
     private final HttpStatus httpStatus;
     private final Boolean success;
