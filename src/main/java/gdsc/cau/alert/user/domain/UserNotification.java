@@ -1,42 +1,38 @@
 package gdsc.cau.alert.user.domain;
 
+import gdsc.cau.alert.post.domain.Notification;
 import gdsc.cau.alert.util.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@IdClass(UserNotification.PK.class) // 복합키 클래스
 @Getter
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "notification_id"})
-})
 @Entity
 public class UserNotification extends BaseEntity {
 
     @Id
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_notification_id")
+    private Long id;
 
-    @Id
-    @Column(name = "notification_id", insertable = false, updatable = false)
-    private Long notificationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "notification_id")
+    private Notification notification;
 
     private boolean isRead;
 
-    public static UserNotification createUserNotification(Long userId, Long notificationId, boolean isRead) {
+    public static UserNotification createUserNotification(User user, Notification notification) {
         UserNotification userNotification = new UserNotification();
-        userNotification.userId = userId;
-        userNotification.notificationId = notificationId;
-        userNotification.isRead = isRead;
+        userNotification.user = user;
+        userNotification.notification = notification;
+        userNotification.isRead = false;
         return userNotification;
-    }
-
-    public static class PK implements Serializable {
-        Long userId;
-        Long notificationId;
     }
 }
