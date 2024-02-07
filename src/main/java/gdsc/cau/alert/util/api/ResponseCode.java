@@ -18,6 +18,8 @@ public enum ResponseCode {
     FORBIDDEN(HttpStatus.FORBIDDEN, false, "권한이 없습니다."),
 
     // 404 Not Found
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, false, "사용자를 찾을 수 없습니다."),
+    NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "알림을 찾을 수 없습니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, false, "허용되지 않은 메소드입니다."),
