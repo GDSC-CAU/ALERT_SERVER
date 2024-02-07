@@ -19,6 +19,8 @@ public class User extends BaseEntity {
 
     private String name;
 
+    private String phone;
+
     private String address1;
 
     private String address2;
