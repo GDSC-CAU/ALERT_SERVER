@@ -20,6 +20,7 @@ public enum ResponseCode {
     // 404 Not Found
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, false, "사용자를 찾을 수 없습니다."),
     NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "알림을 찾을 수 없습니다."),
+    ANIMAL_NOT_FOUND(HttpStatus.NOT_FOUND, false, "동물을 찾을 수 없습니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, false, "허용되지 않은 메소드입니다."),
@@ -35,6 +36,10 @@ public enum ResponseCode {
     USER_DELETE_SUCCESS(HttpStatus.OK, true, "사용자 삭제 성공"),
     NOTIFICATION_READ_SUCCESS(HttpStatus.OK, true, "알림 조회 성공"),
     NOTIFICATION_DELETE_SUCCESS(HttpStatus.OK, true, "알림 수정 성공"),
+    ANIMAL_READ_SUCCESS(HttpStatus.OK, true, "동물 조회 성공"),
+    ANIMAL_CREATE_SUCCESS(HttpStatus.OK, true, "동물 생성 성공"),
+    ANIMAL_UPDATE_SUCCESS(HttpStatus.OK, true, "동물 수정 성공"),
+    ANIMAL_DELETE_SUCCESS(HttpStatus.OK, true, "동물 삭제 성공"),
 
     // 201 Created
     USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공");
