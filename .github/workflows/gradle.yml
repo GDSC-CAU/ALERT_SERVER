@@ -35,6 +35,12 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
         
+    - name: make serviceAccountkey.json
+      run: |
+        touch serviceAccountkey.json
+        echo ${{ secrets.FIREBASE_ACCOUNT_KEY }} >> serviceAccountkey.json
+      shell: bash
+            
     # Springboot Application Build
     - name: Build with Gradle
       run: ./gradlew build -x test
