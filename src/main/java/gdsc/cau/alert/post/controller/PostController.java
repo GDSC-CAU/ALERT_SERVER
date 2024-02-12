@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RequiredArgsConstructor
 @RequestMapping("/api/post")
 @RestController
 public class PostController {
-
-    //private final PostService postService;
 
     @GetMapping
     public ApiResponse<Void> createPost() {
