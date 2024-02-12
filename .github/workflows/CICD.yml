@@ -29,8 +29,8 @@ jobs:
       shell: bash
       
     # Springboot Application Build
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
       env: 
         DB_URL: ${{ secrets.DB_URL }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
@@ -38,6 +38,9 @@ jobs:
         JWT_SECRET: ${{ secrets.JWT_SECRET }}
       with: 
         arguments: build
+
+    - name: Build with Gradle
+      run: ./gradlew build -x test
 
     # Docker Login
     - name: Docker Login
