@@ -26,6 +26,8 @@ public enum ResponseCode {
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, false, "허용되지 않은 메소드입니다."),
 
     // 409 Conflict
+    USER_ALREADY_EXISTS(HttpStatus.CONFLICT, false, "이미 존재하는 사용자입니다."),
+    ANIMAL_ALREADY_EXISTS(HttpStatus.CONFLICT, false, "이미 존재하는 동물입니다."),
 
     // 500 Internal Server Error
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "서버에 오류가 발생하였습니다."),
@@ -40,6 +42,8 @@ public enum ResponseCode {
     ANIMAL_CREATE_SUCCESS(HttpStatus.OK, true, "동물 생성 성공"),
     ANIMAL_UPDATE_SUCCESS(HttpStatus.OK, true, "동물 수정 성공"),
     ANIMAL_DELETE_SUCCESS(HttpStatus.OK, true, "동물 삭제 성공"),
+    USER_LOGIN_SUCCESS(HttpStatus.OK, true, "사용자 로그인 성공"),
+    USER_SIGNUP_SUCCESS(HttpStatus.OK, true, "사용자 회원가입 성공"),
 
     // 201 Created
     USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공");
