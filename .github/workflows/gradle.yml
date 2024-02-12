@@ -29,17 +29,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
-    # Springboot Application Build
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
-      with:
-        arguments: clean bootJar
-
     - name: docker login
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        
+    # Springboot Application Build
+    - name: Build with Gradle
+      run: ./gradlew build -x test
 
     - name: docker image build
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
