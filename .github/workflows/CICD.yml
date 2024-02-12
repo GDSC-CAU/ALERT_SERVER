@@ -38,7 +38,14 @@ jobs:
       
     # Springboot Application Build
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      uses: gradle/gradle-build-action@ec92e829475ac0c2315ea8f9eced72db85bb337a
+      env: 
+        DB_URL: ${{ secrets.DB_URL }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      with: 
+        arguments: build
 
     # Docker Image Build
     - name: Docker Image Build
