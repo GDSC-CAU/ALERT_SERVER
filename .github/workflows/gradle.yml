@@ -1,14 +1,12 @@
-name: Java CI with Gradle
+name: Alert CI/CD
 
 on:
-  push:
-    branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 
 jobs:
-  build-docker-image:
-    runs-on: ubuntu-20.04
+  CI:
+    runs-on: ubuntu-latest
     permissions:
       contents: read
 
@@ -38,7 +36,7 @@ jobs:
             
     # Springboot Application Build
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew build
 
     # Docker Image Build
     - name: Docker Image Build
@@ -47,11 +45,10 @@ jobs:
     # DockerHub Push
     - name: DockerHub Push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
-  run-docker-image-on-ec2:
-    needs: build-docker-image
-    runs-on: self-hosted
+  CD:
+    runs-on: ubuntu-latest
+    needs: CI
     steps:
-
     - name: Docker Pull
       run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
     
