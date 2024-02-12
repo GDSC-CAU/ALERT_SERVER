@@ -15,4 +15,6 @@ public class PostController {
         return ApiResponse.success(null, ResponseCode.USER_CREATE_SUCCESS.getMessage());
     }
 
+    // CICD Test
+
 }
