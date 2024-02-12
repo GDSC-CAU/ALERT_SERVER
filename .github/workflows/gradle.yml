@@ -37,7 +37,7 @@ jobs:
         
     - name: make serviceAccountkey.json
       run: |
-        touch serviceAccountkey.json
+        touch serviceAccountKey.json
         echo ${{ secrets.FIREBASE_ACCOUNT_KEY }} >> serviceAccountkey.json
       shell: bash
             
