@@ -55,8 +55,8 @@ jobs:
     - name: Docker Pull
       run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
     
-    - name: Docker Stop
-      run: sudo docker stop gdsc_alert 2>/dev/null || true
+    - name: Docker Remove
+      run: sudo docker rm gdsc_alert 2>/dev/null || true
 
     - name: Docker Run New
       run: sudo docker run --name gdsc_alert -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
