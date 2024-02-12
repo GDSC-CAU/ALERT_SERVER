@@ -36,7 +36,7 @@ jobs:
         arguments: clean bootJar
 
     - name: docker image build
-      run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
+      run: docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
 
     - name: docker login
       uses: docker/login-action@v2
