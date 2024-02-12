@@ -7,8 +7,7 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  build:
-
+  build-docker-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -48,3 +47,19 @@ jobs:
     # DockerHub Push
     - name: DockerHub Push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+  run-docker-image-on-ec2:
+    needs: build-docker-image
+    runs-on: self-hosted
+    steps:
+
+    - name: Docker Pull
+      run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+    
+    - name: Docker Stop
+      run: sudo docker stop gdsc_alert 2>/dev/null || true
+
+    - name: Docker Run New
+      run: sudo docker run --name gdsc_alert -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+
+    - name: Docker Delete Old Image
+      run: sudo docker system prune -f
