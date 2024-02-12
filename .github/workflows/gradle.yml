@@ -31,12 +31,9 @@ jobs:
         
     # Springboot Application Build
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1 # v3.0.0
+      uses: gradle/gradle-build-action@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
       with:
         arguments: clean bootJar
-
-    - name: docker image build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
 
     - name: docker login
       uses: docker/login-action@v2
@@ -44,5 +41,8 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+    - name: docker image build
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+
     - name: docker Hub push
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
