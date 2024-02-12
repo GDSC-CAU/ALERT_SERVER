@@ -1,8 +1,6 @@
 package gdsc.cau.alert.post.controller;
 
-import gdsc.cau.alert.post.service.PostService;
 import gdsc.cau.alert.util.api.ApiResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
