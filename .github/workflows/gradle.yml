@@ -40,7 +40,7 @@ jobs:
       run: ./gradlew build -x test
 
     - name: docker image build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+      run: docker buildx build ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
 
     - name: docker Hub push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
