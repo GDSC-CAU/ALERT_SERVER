@@ -58,8 +58,8 @@ jobs:
     - name: Docker Remove
       run: sudo docker rm -f gdsc_alert 2>/dev/null || true
 
+    - name: Docker Old Image Remove
+      run: sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+
     - name: Docker Run New
       run: sudo docker run --name gdsc_alert -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
-
-    - name: Docker Delete Old Image
-      run: sudo docker system prune -f
