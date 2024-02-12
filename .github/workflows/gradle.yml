@@ -39,7 +39,6 @@ jobs:
       run: |
         touch serviceAccountKey.json
         echo ${{ secrets.FIREBASE_ACCOUNT_KEY }} >> serviceAccountkey.json
-      shell: bash
             
     # Springboot Application Build
     - name: Build with Gradle
