@@ -1,6 +1,7 @@
 package gdsc.cau.alert.post.controller;
 
 import gdsc.cau.alert.util.api.ApiResponse;
+import gdsc.cau.alert.util.api.ResponseCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
 
     @GetMapping
-    public ApiResponse<Void> createPost() {
-        return ApiResponse.success(null, "게시글이 성공적으로 생성되었습니다.");
+    public ApiResponse<Void> getPost() {
+        return ApiResponse.success(null, ResponseCode.USER_CREATE_SUCCESS.getMessage());
     }
+
 }
