@@ -1,6 +1,8 @@
 name: Java CI with Gradle
 
 on:
+  push:
+    branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 
@@ -10,7 +12,12 @@ permissions:
 jobs:
   CI:
     runs-on: ubuntu-latest
-
+    env: 
+      DB_URL: ${{ secrets.DB_URL }}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      
     steps:
     - uses: actions/checkout@v3
     
@@ -28,17 +35,12 @@ jobs:
         echo ${{ secrets.FIREBASE_ACCOUNT_KEY }} >> serviceAccountkey.json
       shell: bash
 
-    - name: make application.properties
-      run: |
-        cd src/main/resources
-        rm application.properties
-        touch application.properties
-        echo ${{ secrets.APPLICATION_PROPERTIES }} >> application.properties
-        
-      
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
     # Springboot Application Build
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew build
 
     # Docker Login
     - name: Docker Login
