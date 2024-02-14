@@ -27,16 +27,20 @@ jobs:
         touch serviceAccountKey.json
         echo ${{ secrets.FIREBASE_ACCOUNT_KEY }} >> serviceAccountkey.json
       shell: bash
-      
+
+    - name: Set environment variables
+      run: |
+        echo "::set-env name=DB_URL::${{ secrets.DB_URL }}"   
+        echo "::set-env name=DB_USERNAME::${{ secrets.DB_USERNAME }}"   
+        echo "::set-env name=DB_PASSWORD::${{ secrets.DB_PASSWORD }}"   
+        echo "::set-env name=JWT_SECRET::${{ secrets.JWT_SECRET }}"   
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      shell: bash
+        
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v3
-      env:
-        DB_URL: ${{ secrets.DB_URL }}
-        DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      with:
-        arguments: build
 
     - name: Docker Login
       uses: docker/login-action@v2
@@ -57,19 +61,12 @@ jobs:
     runs-on: self-hosted
     needs: CI
     steps:
-    - name: Docker Pull
-      run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
     
-    - name: Docker Remove
+    - name: Docker Container Remove
       run: sudo docker rm -f gdsc_alert 2>/dev/null || true
 
     - name: Docker Old Image Remove
       run: sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
 
     - name: Docker Run New
-      run: sudo docker run --name gdsc_alert -d -p 8080:8080 \
-        -e DB_URL=${{ secrets.DB_URL }} \
-        -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
-        -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-        -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-        ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+      run: sudo docker run --name gdsc_alert -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
