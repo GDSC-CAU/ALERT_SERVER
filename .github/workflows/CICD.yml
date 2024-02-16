@@ -62,4 +62,11 @@ jobs:
       run: sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
 
     - name: Docker Run New
-      run: sudo docker run --name gdsc_alert -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
+      run: sudo docker run --name gdsc_alert \
+        -e DB_URL=${{ secrets.DB_URL }} \
+        -e DB_USERNAME=${{ secrets.DB_USERNAME }}
+        -e DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        -e JWT_SECRET=${{ secrets.JWT_SECRET }}
+        -d \
+        -p 8080:8080 \
+        ${{ secrets.DOCKERHUB_USERNAME }}/gdsc_alert
