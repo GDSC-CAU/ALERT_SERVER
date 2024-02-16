@@ -28,13 +28,6 @@ jobs:
         echo ${{ secrets.FIREBASE_ACCOUNT_KEY }} >> serviceAccountkey.json
       shell: bash
 
-    - name: Set environment variables
-      run: |
-        echo "::set-env name=DB_URL::${{ secrets.DB_URL }}"   
-        echo "::set-env name=DB_USERNAME::${{ secrets.DB_USERNAME }}"   
-        echo "::set-env name=DB_PASSWORD::${{ secrets.DB_PASSWORD }}"   
-        echo "::set-env name=JWT_SECRET::${{ secrets.JWT_SECRET }}"   
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       shell: bash
