@@ -56,9 +56,9 @@ jobs:
 
     - name: Docker Run New
       run: sudo docker run -d --name alert \
-      -e DB_URL=${{secrets.DB_URL}} \
-      -e DB_USERNAME=${{secrets.DB_USERNAME}} \
-      -e DB_PASSWORD=${{secrets.DB_PASSWORD}} \
-      -e JWT_SECRET=${{secrets.JWT_SECRET}} \
-      -e FIREBASE_JSON_KEY=${{secrets.FIREBASE_ACCOUNT_KEY}} \
-      -p 8080:8080 ${{secrets.DOCKERHUB_USERNAME}}/alert
+        -e DB_URL=${{secrets.DB_URL}} \
+        -e DB_USERNAME=${{secrets.DB_USERNAME}} \
+        -e DB_PASSWORD=${{secrets.DB_PASSWORD}} \
+        -e JWT_SECRET=${{secrets.JWT_SECRET}} \
+        -e FIREBASE_JSON_KEY=${{secrets.FIREBASE_ACCOUNT_KEY}} \
+        -p 8080:8080 ${{secrets.DOCKERHUB_USERNAME}}/alert
