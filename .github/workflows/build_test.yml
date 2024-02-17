@@ -3,13 +3,16 @@ name: Alert Build Test
 on:
   push:
     branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+permissions:
+  contents: read
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
     - uses: actions/checkout@v4
@@ -23,5 +26,5 @@ jobs:
       uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
 
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew clean build
       
