@@ -21,6 +21,8 @@ public enum ResponseCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, false, "사용자를 찾을 수 없습니다."),
     NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "알림을 찾을 수 없습니다."),
     ANIMAL_NOT_FOUND(HttpStatus.NOT_FOUND, false, "동물을 찾을 수 없습니다."),
+    POST_NOT_FOUND(HttpStatus.NOT_FOUND, false, "게시글을 찾을 수 없습니다."),
+    NOT_VOTED(HttpStatus.NOT_FOUND, false, "투표하지 않은 게시글입니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, false, "허용되지 않은 메소드입니다."),
@@ -28,6 +30,8 @@ public enum ResponseCode {
     // 409 Conflict
     USER_ALREADY_EXISTS(HttpStatus.CONFLICT, false, "이미 존재하는 사용자입니다."),
     ANIMAL_ALREADY_EXISTS(HttpStatus.CONFLICT, false, "이미 존재하는 동물입니다."),
+    POST_ALREADY_EXISTS(HttpStatus.CONFLICT, false, "이미 존재하는 게시글입니다."),
+    ALREADY_VOTED(HttpStatus.CONFLICT, false, "이미 투표한 게시글입니다."),
 
     // 500 Internal Server Error
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "서버에 오류가 발생하였습니다."),
