@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -19,8 +21,6 @@ public class Post extends BaseEntity {
     @Column(name = "post_id")
     private Long id;
 
-    private String imageUrl;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -29,25 +29,39 @@ public class Post extends BaseEntity {
 
     private String content;
 
-    private LocalDateTime capturedAt; // 촬영일시
+    private String imageUrl;
 
-    private String address1;
+    private String location;
 
-    private String address2;
+    private String species;
 
-    public static Post createPost(String imageUrl, User user, String title, String content, String address1, String address2) {
+    private String capturedAt;
+
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Vote> votes = new ArrayList<>();
+
+    public static Post createPost(User user, String title, String content, String imageUrl, String location, String species, String capturedAt) {
         Post post = new Post();
         post.imageUrl = imageUrl;
         post.user = user;
         post.title = title;
         post.content = content;
-        post.address1 = address1;
-        post.address2 = address2;
+        post.location = location;
+        post.species = species;
+        post.capturedAt = capturedAt;
         return post;
     }
 
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public Pair<Integer, Integer> getVoteCounts(){
+        int agreeCount = 0;
+        for(Vote vote : votes){
+            agreeCount += vote.isAgree() ? 1 : 0;
+        }
+        return Pair.of(agreeCount, votes.size() - agreeCount);
     }
 }
